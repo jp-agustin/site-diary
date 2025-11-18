@@ -95,9 +95,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit }) => {
         onChange={(e) => setAttendees(e.target.value)}
         placeholder="Attendees (comma separated)"
       />
-      <ImageUpload
-        onChange={(url) => setAttachments((prev) => [...prev, url])}
-      />
+      <ImageUpload onChange={setAttachments} />
       <Button className="mt-4 w-full" onClick={handleSubmit}>
         Submit
       </Button>
