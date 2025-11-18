@@ -1,6 +1,6 @@
-import DetailSection from '@/components/site-diary/detail-section';
-import PhotoGallery from '@/components/site-diary/photo-gallery';
 import type { SiteDiary } from '@/data/site-diary';
+import DetailSection from './detail-section';
+import PhotoGallery from './photo-gallery';
 
 interface DiaryDetailsProps {
   diary: SiteDiary;
