@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import DiaryCard from "@/components/site-diary/diary-card";
-import { siteDiaries } from "@/data/site-diary";
+import DiaryCard from '@/components/site-diary/diary-card';
+import { siteDiaries } from '@/data/site-diary';
 
 const SiteDiaryListPage: React.FC = () => {
   // TODO: Use Apollo to fetch the data
@@ -9,7 +9,7 @@ const SiteDiaryListPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="p-4 space-y-4">
+      <div className="space-y-4 p-4">
         {filteredDiaries.map((diary) => (
           <DiaryCard key={diary.id} {...diary} />
         ))}

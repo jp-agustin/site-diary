@@ -21,7 +21,7 @@ const DiaryCard: React.FC<SiteDiary> = ({
   return (
     <Card
       onClick={() => router.push(`/site-diary/${id}`)}
-      className="cursor-pointer transition hover:shadow-md gap-0 p-0"
+      className="cursor-pointer gap-0 p-0 transition hover:shadow-md"
     >
       <CardHeader className="p-3">
         <div className="flex justify-between text-sm text-gray-500">
@@ -31,7 +31,7 @@ const DiaryCard: React.FC<SiteDiary> = ({
         <CardTitle className="text-base">{title}</CardTitle>
       </CardHeader>
 
-      <CardContent className="py-0 px-3">
+      <CardContent className="px-3 py-0">
         <p className="line-clamp-2 text-sm">{content}</p>
       </CardContent>
 
