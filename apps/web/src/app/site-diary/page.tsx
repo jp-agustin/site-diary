@@ -3,14 +3,23 @@
 import DiaryCard from '@/components/site-diary/diary-card';
 import MobileHeader from '@/components/site-diary/mobile-header';
 import { Button } from '@/components/ui/button';
-import { siteDiaries } from '@/data/site-diary';
+import { SiteDiary } from '@/data/site-diary';
+import { SITE_DIARIES } from '@/graphql/queries';
+import { useQuery } from '@apollo/client/react';
 import { useRouter } from 'next/navigation';
+
+interface SiteDiariesQuery {
+  siteDiaries: SiteDiary[];
+}
 
 const SiteDiaryListPage: React.FC = () => {
   const router = useRouter();
+  const { data, loading, error } = useQuery<SiteDiariesQuery>(SITE_DIARIES);
 
-  // TODO: Use Apollo to fetch the data
-  const filteredDiaries = siteDiaries; // can implement date filtering later
+  if (loading) return <div className="p-4">Loading...</div>;
+  if (error) return <div className="p-4 text-red-500">{error.message}</div>;
+
+  const diaries = (data?.siteDiaries ?? []) as SiteDiary[];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -23,7 +32,7 @@ const SiteDiaryListPage: React.FC = () => {
       </div>
 
       <div className="space-y-4 p-4">
-        {filteredDiaries.map((diary) => (
+        {diaries.map((diary) => (
           <DiaryCard key={diary.id} {...diary} />
         ))}
       </div>
