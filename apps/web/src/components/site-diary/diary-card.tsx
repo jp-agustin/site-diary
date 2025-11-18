@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { SiteDiary } from '@/data/site-diary';
+import { SiteDiary } from '@/types/__generated__/graphql';
 import { useRouter } from 'next/navigation';
 
 const DiaryCard: React.FC<SiteDiary> = ({

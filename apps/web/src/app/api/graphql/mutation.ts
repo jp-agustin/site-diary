@@ -1,4 +1,4 @@
-import { siteDiaries, SiteDiary } from '@/data/site-diary';
+import { SiteDiary } from '@/data/site-diary';
 import type { Int } from 'grats';
 
 /** @gqlInput */

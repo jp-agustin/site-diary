@@ -1,6 +1,5 @@
-import { siteDiaries } from '@/data/site-diary';
+import { siteDiaries, SiteDiary } from '@/data/site-diary';
 import { NextRequest, NextResponse } from 'next/server';
-import { SiteDiary } from '../../../data/site-diary';
 
 export async function GET() {
   const diaries = siteDiaries.map((entry) => ({

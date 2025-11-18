@@ -3,14 +3,10 @@
 import DiaryCard from '@/components/site-diary/diary-card';
 import MobileHeader from '@/components/site-diary/mobile-header';
 import { Button } from '@/components/ui/button';
-import { SiteDiary } from '@/data/site-diary';
 import { SITE_DIARIES } from '@/graphql/queries';
+import { SiteDiariesQuery, SiteDiary } from '@/types/__generated__/graphql';
 import { useQuery } from '@apollo/client/react';
 import { useRouter } from 'next/navigation';
-
-interface SiteDiariesQuery {
-  siteDiaries: SiteDiary[];
-}
 
 const SiteDiaryListPage: React.FC = () => {
   const router = useRouter();

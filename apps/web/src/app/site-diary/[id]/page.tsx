@@ -2,14 +2,10 @@
 
 import DiaryDetail from '@/components/site-diary/diary-detail';
 import MobileHeader from '@/components/site-diary/mobile-header';
-import { siteDiaries, SiteDiary } from '@/data/site-diary';
 import { SITE_DIARY } from '@/graphql/queries';
+import { SiteDiary, SiteDiaryQuery } from '@/types/__generated__/graphql';
 import { useQuery } from '@apollo/client/react';
 import { useParams } from 'next/navigation';
-
-interface SiteDiaryQuery {
-  siteDiary: SiteDiary;
-}
 
 const SiteDiaryViewPage: React.FC = () => {
   const { id } = useParams();

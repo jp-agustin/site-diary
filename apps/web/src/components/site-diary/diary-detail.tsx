@@ -1,4 +1,4 @@
-import type { SiteDiary } from '@/data/site-diary';
+import { SiteDiary } from '@/types/__generated__/graphql';
 import DetailSection from './detail-section';
 import PhotoGallery from './photo-gallery';
 

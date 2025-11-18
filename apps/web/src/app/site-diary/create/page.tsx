@@ -3,6 +3,7 @@
 import DiaryForm from '@/components/site-diary/diary-form';
 import MobileHeader from '@/components/site-diary/mobile-header';
 import { CREATE_SITE_DIARY } from '@/graphql/queries';
+import { SiteDiaryInput } from '@/types/__generated__/graphql';
 import { useMutation } from '@apollo/client/react';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
@@ -26,7 +27,7 @@ const SiteDiaryCreatePage: React.FC = () => {
     attendees?: string[];
     attachments?: string[];
   }) => {
-    const input = {
+    const input: SiteDiaryInput = {
       id: nanoid(),
       date: data.date,
       title: data.title,
