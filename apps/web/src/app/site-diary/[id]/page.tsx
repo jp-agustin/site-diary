@@ -1,6 +1,7 @@
 'use client';
 
 import DiaryDetail from '@/components/site-diary/diary-detail';
+import MobileHeader from '@/components/site-diary/mobile-header';
 import { siteDiaries } from '@/data/site-diary';
 import { useParams } from 'next/navigation';
 
@@ -14,6 +15,8 @@ const SiteDiaryViewPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MobileHeader title="Diary Entry" />
+
       <div className="p-4">
         <DiaryDetail diary={diary} />
       </div>

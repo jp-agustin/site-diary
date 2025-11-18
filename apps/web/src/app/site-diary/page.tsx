@@ -1,6 +1,7 @@
 'use client';
 
 import DiaryCard from '@/components/site-diary/diary-card';
+import MobileHeader from '@/components/site-diary/mobile-header';
 import { siteDiaries } from '@/data/site-diary';
 
 const SiteDiaryListPage: React.FC = () => {
@@ -9,6 +10,8 @@ const SiteDiaryListPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MobileHeader title="Site Diaries" />
+
       <div className="space-y-4 p-4">
         {filteredDiaries.map((diary) => (
           <DiaryCard key={diary.id} {...diary} />

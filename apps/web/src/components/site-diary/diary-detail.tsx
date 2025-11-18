@@ -14,7 +14,7 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ diary }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-background/80 sticky top-0 z-10 border-b pt-4 pb-3 backdrop-blur">
+      <div className="border-b pt-4 pb-3 backdrop-blur">
         <h1 className="text-2xl leading-tight font-semibold break-words">
           {diary.title}
         </h1>
