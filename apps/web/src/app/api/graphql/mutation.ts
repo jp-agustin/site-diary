@@ -1,4 +1,11 @@
-import { SiteDiary } from '@/data/site-diary';
+import { siteDiaries, SiteDiary } from '@/data/site-diary';
+import type { Int } from 'grats';
+
+/** @gqlInput */
+interface WeatherInput {
+  temperature: Int;
+  description: string;
+}
 
 /** @gqlInput */
 interface SiteDiaryInput {
@@ -6,6 +13,10 @@ interface SiteDiaryInput {
   date: string;
   createdBy: string;
   title: string;
+  content?: string;
+  attendees?: string[];
+  attachments?: string[];
+  weather?: WeatherInput;
 }
 
 /** @gqlMutationField */

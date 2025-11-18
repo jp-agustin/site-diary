@@ -2,13 +2,20 @@
 
 import DiaryForm from '@/components/site-diary/diary-form';
 import MobileHeader from '@/components/site-diary/mobile-header';
-import { siteDiaries, SiteDiary } from '@/data/site-diary';
+import { CREATE_SITE_DIARY } from '@/graphql/queries';
+import { useMutation } from '@apollo/client/react';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
 const SiteDiaryCreatePage: React.FC = () => {
   const router = useRouter();
+  const [createDiary] = useMutation(CREATE_SITE_DIARY, {
+    refetchQueries: ['SiteDiaries'],
+    awaitRefetchQueries: true,
+    onCompleted: () => {
+      router.push('/site-diary');
+    },
+  });
 
   const handleSubmit = (data: {
     date: string;
@@ -19,7 +26,7 @@ const SiteDiaryCreatePage: React.FC = () => {
     attendees?: string[];
     attachments?: string[];
   }) => {
-    const newDiary: SiteDiary = {
+    const input = {
       id: nanoid(),
       date: data.date,
       title: data.title,
@@ -33,9 +40,11 @@ const SiteDiaryCreatePage: React.FC = () => {
       createdBy: 'Demo User',
     };
 
-    // TODO: Use mutation to push new element
-    siteDiaries.unshift(newDiary);
-    router.push('/site-diary');
+    createDiary({
+      variables: {
+        input,
+      },
+    });
   };
 
   return (
