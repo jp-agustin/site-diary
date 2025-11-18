@@ -20,6 +20,23 @@ interface SiteDiaryInput {
 }
 
 /** @gqlMutationField */
-export function createSiteDiary(input: SiteDiaryInput): SiteDiary {
-  return input;
+export async function createSiteDiary(
+  input: SiteDiaryInput,
+): Promise<SiteDiary> {
+  const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}/site-diary`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.API_KEY || '',
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Failed to create site diary: ${errorText}`);
+  }
+
+  const created: SiteDiary = await res.json();
+  return created;
 }

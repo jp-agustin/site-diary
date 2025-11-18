@@ -3,14 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { SiteDiary } from '../../../data/site-diary';
 
 export async function GET() {
-  const diaries = siteDiaries.map((entry) => {
-    return {
-      id: entry.id,
-      date: entry.date,
-      title: entry.title,
-      createdBy: entry.createdBy,
-    };
-  });
+  const diaries = siteDiaries.map((entry) => ({
+    id: entry.id,
+    date: entry.date,
+    title: entry.title,
+    createdBy: entry.createdBy,
+    content: entry.content,
+    weather: entry.weather,
+    attendees: entry.attendees,
+    attachments: entry.attachments,
+  }));
 
   return NextResponse.json(diaries, {
     status: 200,
@@ -33,10 +35,7 @@ export async function POST(request: NextRequest) {
       throw new Error('id, date, createdBy and title are required');
     }
 
-    return NextResponse.json(
-      { message: 'Site diary created successfully', siteDiary },
-      { status: 201 },
-    );
+    return NextResponse.json(siteDiary, { status: 201 });
   } catch (e: unknown) {
     let errorMessage = 'Unknown error';
 

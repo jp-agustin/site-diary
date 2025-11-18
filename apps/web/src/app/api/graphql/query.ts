@@ -1,11 +1,24 @@
-import { siteDiaries as rawSiteDiaries, SiteDiary } from '@/data/site-diary';
+import { SiteDiary } from '@/data/site-diary';
 
 /** @gqlQueryField */
-export function siteDiaries(): Array<SiteDiary> {
-  return rawSiteDiaries;
+export async function siteDiaries(): Promise<SiteDiary[]> {
+  const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}/site-diary`, {
+    headers: { 'x-api-key': process.env.API_KEY || '' },
+  });
+
+  if (!res.ok) throw new Error('Failed to fetch site diaries');
+  return res.json();
 }
 
 /** @gqlQueryField */
-export function siteDiary(id: string): SiteDiary | undefined {
-  return rawSiteDiaries.find((entry) => entry.id === id);
+export async function siteDiary(id: string): Promise<SiteDiary | undefined> {
+  const res = await fetch(
+    `${process.env.NEXT_PRIVATE_API_URL}/site-diary/${id}`,
+    {
+      headers: { 'x-api-key': process.env.API_KEY || '' },
+    },
+  );
+
+  if (!res.ok) throw new Error('Failed to fetch site diary');
+  return res.json();
 }
