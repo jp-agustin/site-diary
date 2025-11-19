@@ -13,10 +13,10 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ diary }) => {
   return (
     <div className="mx-auto max-w-5xl space-y-4 p-2 lg:p-6">
       <div
-        className="flex flex-col border-b pb-4 lg:flex-row lg:items-center lg:justify-between"
+        className="flex flex-col border-b pb-4 lg:items-center lg:justify-between"
         style={{ borderColor: 'var(--color-border)' }}
       >
-        <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-2 lg:items-center">
           <h1
             className="text-2xl font-semibold break-words"
             style={{ color: 'var(--color-foreground)' }}
