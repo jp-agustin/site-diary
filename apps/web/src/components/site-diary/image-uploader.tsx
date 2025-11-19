@@ -21,8 +21,10 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUploaded }) => {
           if (!res) return;
 
           const urls = res.map((f) => f.url);
-          setFiles((prev) => [...prev, ...urls]);
-          onUploaded([...files, ...urls]);
+          const updated = [...files, ...urls];
+
+          setFiles(updated);
+          onUploaded(updated);
         }}
         onUploadError={(err) => alert(`Upload failed: ${err.message}`)}
       />

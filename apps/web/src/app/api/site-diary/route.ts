@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET() {
   try {
     const diaries = await prisma.siteDiary.findMany({
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
         date: true,

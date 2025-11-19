@@ -34,8 +34,10 @@ const weatherOptions = [
   'snowy',
 ];
 
+const today = new Date().toISOString().split('T')[0];
+
 const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(today);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [weatherDesc, setWeatherDesc] = useState(weatherOptions[0]);
@@ -56,14 +58,12 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
     });
   };
 
-  const today = new Date().toISOString().split('T')[0];
-
   return (
     <div className="space-y-6 p-4 lg:mx-auto lg:max-w-3xl">
       <div className="space-y-4">
         <Input
           type="date"
-          value={date || today}
+          value={date}
           max={today}
           onChange={(e) => setDate(e.target.value)}
           placeholder="Date"
