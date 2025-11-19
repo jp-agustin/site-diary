@@ -1,6 +1,6 @@
 import { UploadDropzone } from '@/lib/uploadthing';
 import { useState } from 'react';
-import '@uploadthing/react/styles.css'; // It forces any element with the hidden attribute to display: none !important, overriding Tailwind classes like lg:block 
+import '@uploadthing/react/styles.css'; // It forces any element with the hidden attribute to display: none !important, overriding Tailwind classes like lg:block
 
 interface ImageUploaderProps {
   onUploaded: (urls: string[]) => void;
