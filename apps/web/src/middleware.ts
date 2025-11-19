@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
 const API_KEY = process.env.API_KEY;
 
 // Paths to protect
-const PROTECTED_PATHS = ['/api/site-diary'];
+const PROTECTED_PATHS = ['/api/site-diary', '/api/ai'];
 
 export function middleware(request: NextRequest) {
   // Check if the request path matches protected paths
