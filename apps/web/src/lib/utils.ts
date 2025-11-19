@@ -15,3 +15,13 @@ export const formatDate = (rawDate?: string) => {
     year: 'numeric',
   }).format(dateObj);
 };
+
+export const getInitials = (rawName?: string) => {
+  return rawName
+    ? rawName
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .toUpperCase()
+    : '?';
+};

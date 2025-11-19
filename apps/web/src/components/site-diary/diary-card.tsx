@@ -1,19 +1,11 @@
-import { formatDate } from '@/lib/utils';
+import { formatDate, getInitials } from '@/lib/utils';
 import { SiteDiary } from '@/types/__generated__/graphql';
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import { Cloud, CloudRain, CloudSnow, CloudSun, Sun, Wind } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import WeatherIcon from './weather-icon';
 
-interface DiaryCardProps extends SiteDiary { }
-
-const weatherIconMap: Record<string, React.JSX.Element> = {
-  sunny: <Sun className="h-5 w-5 text-yellow-500" />,
-  rainy: <CloudRain className="h-5 w-5 text-blue-500" />,
-  cloudy: <Cloud className="h-5 w-5 text-gray-400" />,
-  windy: <Wind className="h-5 w-5 text-teal-400" />,
-  'partly cloudy': <CloudSun className="h-5 w-5 text-yellow-400" />,
-  snowy: <CloudSnow className="h-5 w-5 text-blue-200" />,
-};
+interface DiaryCardProps extends SiteDiary {}
 
 const DiaryCard: React.FC<DiaryCardProps> = ({
   id,
@@ -24,14 +16,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   weather,
 }) => {
   const router = useRouter();
-
-  const initials = createdBy
-    ? createdBy
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-    : '?';
 
   return (
     <div
@@ -50,13 +34,10 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
       >
         <span>{formatDate(date)}</span>
         <span className="flex items-center gap-1">
-          {weather?.description
-            ? weatherIconMap[weather.description.toLowerCase()] ||
-            weather.description
-            : 'N/A'}
-          {weather?.temperature ? (
-            <span>{Math.round(weather.temperature)}°C</span>
-          ) : null}
+          <WeatherIcon
+            description={weather?.description.toLowerCase()}
+            temperature={weather?.temperature}
+          />
         </span>
       </div>
 
@@ -82,7 +63,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
               color: 'var(--color-secondary-foreground)',
             }}
           >
-            {initials}
+            {getInitials(createdBy)}
           </AvatarFallback>
         </Avatar>
         <span style={{ color: 'var(--color-muted-foreground)' }}>
