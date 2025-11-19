@@ -2,6 +2,7 @@
 
 import DesktopHeader from '@/components/site-diary/desktop-header';
 import DiaryCard from '@/components/site-diary/diary-card';
+import DiarySummaryCard from '@/components/site-diary/diary-summary';
 import MobileHeader from '@/components/site-diary/mobile-header';
 import { Button } from '@/components/ui/button';
 import { SITE_DIARIES } from '@/graphql/queries';
@@ -45,7 +46,9 @@ const SiteDiaryListPage: React.FC = () => {
         />
       </div>
 
-      <div className="mx-auto max-w-5xl p-4 lg:p-6">
+      <div className="mx-auto max-w-5xl space-y-4 p-4 lg:p-6">
+        <DiarySummaryCard />
+
         {/* Error */}
         {error && (
           <div
