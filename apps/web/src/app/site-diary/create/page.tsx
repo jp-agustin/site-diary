@@ -2,7 +2,7 @@
 
 import DiaryForm from '@/components/site-diary/diary-form';
 import MobileHeader from '@/components/site-diary/mobile-header';
-import { CREATE_SITE_DIARY } from '@/graphql/queries';
+import { CREATE_SITE_DIARY, SITE_DIARIES } from '@/graphql/queries';
 import { SiteDiaryInput } from '@/types/__generated__/graphql';
 import { useMutation } from '@apollo/client/react';
 import { nanoid } from 'nanoid';
@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 const SiteDiaryCreatePage: React.FC = () => {
   const router = useRouter();
   const [createDiary] = useMutation(CREATE_SITE_DIARY, {
-    refetchQueries: ['SiteDiaries'],
+    refetchQueries: [{ query: SITE_DIARIES }],
     awaitRefetchQueries: true,
     onCompleted: () => {
       router.push('/site-diary');

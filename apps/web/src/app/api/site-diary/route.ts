@@ -1,49 +1,71 @@
-import { siteDiaries, SiteDiary } from '@/data/site-diary';
+import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
-  const diaries = siteDiaries.map((entry) => ({
-    id: entry.id,
-    date: entry.date,
-    title: entry.title,
-    createdBy: entry.createdBy,
-    content: entry.content,
-    weather: entry.weather,
-    attendees: entry.attendees,
-    attachments: entry.attachments,
-  }));
+  try {
+    const diaries = await prisma.siteDiary.findMany({
+      orderBy: { date: 'desc' },
+      select: {
+        id: true,
+        date: true,
+        title: true,
+        createdBy: true,
+        content: true,
+        attendees: true,
+        attachments: true,
+        weather: true,
+      },
+    });
 
-  return NextResponse.json(diaries, {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+    return NextResponse.json(diaries, {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e: unknown) {
+    return NextResponse.json(
+      { error: (e as Error).message || 'Unknown error' },
+      { status: 500 },
+    );
+  }
 }
 
 // POST handler: Create a new site diary
 export async function POST(request: NextRequest) {
   try {
-    const siteDiary = (await request.json()) as SiteDiary;
+    const data = await request.json();
 
-    // Check that id, date, createdBy and title are present, informing the user of the missing fields
-    if (
-      !siteDiary.id ||
-      !siteDiary.date ||
-      !siteDiary.createdBy ||
-      !siteDiary.title
-    ) {
-      throw new Error('id, date, createdBy and title are required');
+    const {
+      id,
+      date,
+      title,
+      createdBy,
+      content,
+      attendees,
+      attachments,
+      weather,
+    } = data;
+
+    if (!id || !date || !title || !createdBy) {
+      throw new Error('id, date, title, and createdBy are required');
     }
 
-    return NextResponse.json(siteDiary, { status: 201 });
+    const siteDiary = await prisma.siteDiary.create({
+      data: {
+        id,
+        date: new Date(date),
+        title,
+        createdBy,
+        content,
+        attendees,
+        attachments,
+        weather,
+      },
+    });
+
+    return NextResponse.json({ ...siteDiary }, { status: 201 });
   } catch (e: unknown) {
-    let errorMessage = 'Unknown error';
-
-    if (e instanceof Error) {
-      errorMessage = e.message;
-    }
-
     return NextResponse.json(
-      { error: 'Invalid request format', errorMessage },
+      { error: (e as Error).message || 'Unknown error' },
       { status: 400 },
     );
   }
