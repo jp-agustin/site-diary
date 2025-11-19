@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
+import BeautifyPreview from './beautify-preview';
 import ImageUploader from './image-uploader';
 import { weatherIconMap } from './weather-icon';
 
@@ -34,9 +35,9 @@ const weatherOptions = [
   'snowy',
 ];
 
-const today = new Date().toISOString().split('T')[0];
-
 const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
+  const today = new Date().toISOString().split('T')[0];
+
   const [date, setDate] = useState(today);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -44,6 +45,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
   const [temperature, setTemperature] = useState<number>(20);
   const [attendees, setAttendees] = useState('');
   const [attachments, setAttachments] = useState<string[]>([]);
+  const [showBeautify, setShowBeautify] = useState(false);
 
   const handleSubmit = () => {
     if (!date || !title) return alert('Date and Title are required');
@@ -56,6 +58,15 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
       attendees: attendees.split(',').map((s) => s.trim()),
       attachments,
     });
+  };
+
+  const handleApproveBeautify = (beautifiedText: string) => {
+    setContent(beautifiedText);
+    setShowBeautify(false);
+  };
+
+  const handleRejectBeautify = () => {
+    setShowBeautify(false);
   };
 
   return (
@@ -75,12 +86,32 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
           placeholder="Title"
           className="border-[var(--color-border)] bg-[var(--color-input)] text-[var(--color-foreground)]"
         />
-        <Textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Content / Description"
-          className="border-[var(--color-border)] bg-[var(--color-input)] text-[var(--color-foreground)]"
-        />
+        <div className="flex flex-col gap-2">
+          <Textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Content / Description"
+            className="flex-1 border-[var(--color-border)] bg-[var(--color-input)] text-[var(--color-foreground)]"
+          />
+
+          {!showBeautify ? (
+            <Button
+              onClick={() => setShowBeautify(true)}
+              disabled={!content}
+              className="ml-auto"
+            >
+              Beautify
+            </Button>
+          ) : (
+            <div className="w-full">
+              <BeautifyPreview
+                originalText={content}
+                onApprove={handleApproveBeautify}
+                onReject={handleRejectBeautify}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col gap-4 lg:flex-row lg:gap-2">
@@ -122,7 +153,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
       <ImageUploader onUploaded={(urls) => setAttachments(urls)} />
 
       <Button
-        className="mt-4 w-full"
+        className="w-full md:w-auto"
         onClick={handleSubmit}
         disabled={isSubmitting}
         style={{
