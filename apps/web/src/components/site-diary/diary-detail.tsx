@@ -1,7 +1,6 @@
 import { formatDate, getInitials } from '@/lib/utils';
 import { SiteDiary } from '@/types/__generated__/graphql';
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
-import { Cloud, CloudRain, CloudSnow, CloudSun, Sun, Wind } from 'lucide-react';
 import DetailSection from './detail-section';
 import PhotoGallery from './photo-gallery';
 import WeatherIcon from './weather-icon';
@@ -12,12 +11,12 @@ interface DiaryDetailsProps {
 
 const DiaryDetails: React.FC<DiaryDetailsProps> = ({ diary }) => {
   return (
-    <div className="mx-auto max-w-5xl space-y-4 p-2 md:p-6">
+    <div className="mx-auto max-w-5xl space-y-4 p-2 lg:p-6">
       <div
-        className="flex flex-col border-b pb-4 md:flex-row md:items-center md:justify-between"
+        className="flex flex-col border-b pb-4 lg:flex-row lg:items-center lg:justify-between"
         style={{ borderColor: 'var(--color-border)' }}
       >
-        <div className="flex flex-col gap-2 md:flex-row md:items-center">
+        <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
           <h1
             className="text-2xl font-semibold break-words"
             style={{ color: 'var(--color-foreground)' }}
@@ -27,7 +26,7 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ diary }) => {
             )}
           </h1>
 
-          <div className="mt-1 flex items-center gap-2 md:mt-0">
+          <div className="mt-1 flex items-center gap-2 lg:mt-0">
             <Avatar className="h-8 w-8">
               <AvatarFallback
                 style={{
@@ -47,7 +46,7 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ diary }) => {
           </div>
         </div>
 
-        <div className="mt-2 flex items-center gap-3 md:mt-0">
+        <div className="mt-2 flex items-center gap-3 lg:mt-0">
           <span
             className="text-sm"
             style={{ color: 'var(--color-muted-foreground)' }}

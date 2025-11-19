@@ -33,7 +33,7 @@ const SiteDiaryViewPage: React.FC = () => {
         />
       </div>
 
-      <div className="mx-auto max-w-5xl p-4 md:p-6">
+      <div className="mx-auto max-w-5xl p-4 lg:p-6">
         {error && (
           <div
             className="mb-4 flex items-center gap-2 rounded-md border px-4 py-3"

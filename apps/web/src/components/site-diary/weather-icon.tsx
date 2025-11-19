@@ -6,7 +6,7 @@ interface WeatherIconProps {
   showTemperature?: boolean;
 }
 
-const weatherIconMap: Record<string, React.JSX.Element> = {
+export const weatherIconMap: Record<string, React.JSX.Element> = {
   sunny: <Sun className="h-5 w-5 text-yellow-500" />,
   rainy: <CloudRain className="h-5 w-5 text-blue-500" />,
   cloudy: <Cloud className="h-5 w-5 text-gray-400" />,

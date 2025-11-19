@@ -45,7 +45,7 @@ const SiteDiaryListPage: React.FC = () => {
         />
       </div>
 
-      <div className="mx-auto max-w-5xl p-4 md:p-6">
+      <div className="mx-auto max-w-5xl p-4 lg:p-6">
         {/* Error */}
         {error && (
           <div
@@ -123,7 +123,7 @@ const SiteDiaryListPage: React.FC = () => {
           <>
             <div className="space-y-4 pb-20">
               {diaries.map((diary) => (
-                <DiaryCard key={diary.id} {...diary} />
+                <DiaryCard key={diary.id} diary={diary} />
               ))}
             </div>
 

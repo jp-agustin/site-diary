@@ -1,25 +1,19 @@
 import { formatDate, getInitials } from '@/lib/utils';
 import { SiteDiary } from '@/types/__generated__/graphql';
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
-import { Cloud, CloudRain, CloudSnow, CloudSun, Sun, Wind } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import WeatherIcon from './weather-icon';
 
-interface DiaryCardProps extends SiteDiary {}
+interface DiaryCardProps {
+  diary: SiteDiary;
+}
 
-const DiaryCard: React.FC<DiaryCardProps> = ({
-  id,
-  date,
-  title,
-  content,
-  createdBy,
-  weather,
-}) => {
+const DiaryCard: React.FC<DiaryCardProps> = ({ diary }) => {
   const router = useRouter();
 
   return (
     <div
-      onClick={() => router.push(`/site-diary/${id}`)}
+      onClick={() => router.push(`/site-diary/${diary.id}`)}
       style={{
         backgroundColor: 'var(--color-card)',
         color: 'var(--color-card-foreground)',
@@ -32,11 +26,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         className="mb-2 flex items-center justify-between text-sm"
         style={{ color: 'var(--color-muted-foreground)' }}
       >
-        <span>{formatDate(date)}</span>
+        <span>{formatDate(diary.date)}</span>
         <span className="flex items-center gap-1">
           <WeatherIcon
-            description={weather?.description.toLowerCase()}
-            temperature={weather?.temperature}
+            description={diary.weather?.description.toLowerCase()}
+            temperature={diary.weather?.temperature}
           />
         </span>
       </div>
@@ -45,14 +39,14 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         className="mb-1 text-base font-semibold"
         style={{ color: 'var(--color-foreground)' }}
       >
-        {title}
+        {diary.title}
       </h2>
 
       <p
         className="mb-3 line-clamp-2 text-sm"
         style={{ color: 'var(--color-muted-foreground)' }}
       >
-        {content}
+        {diary.content}
       </p>
 
       <div className="flex items-center gap-2 text-xs">
@@ -63,11 +57,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
               color: 'var(--color-secondary-foreground)',
             }}
           >
-            {getInitials(createdBy)}
+            {getInitials(diary.createdBy)}
           </AvatarFallback>
         </Avatar>
         <span style={{ color: 'var(--color-muted-foreground)' }}>
-          By {createdBy}
+          By {diary.createdBy}
         </span>
       </div>
     </div>
