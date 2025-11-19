@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
-import ImageUpload from './image-upload';
+import ImageUploader from './image-uploader';
 
 interface DiaryFormProps {
   onSubmit: (data: {
@@ -95,7 +95,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit }) => {
         onChange={(e) => setAttendees(e.target.value)}
         placeholder="Attendees (comma separated)"
       />
-      <ImageUpload onChange={setAttachments} />
+      <ImageUploader onUploaded={(urls) => setAttachments(urls)} />
       <Button className="mt-4 w-full" onClick={handleSubmit}>
         Submit
       </Button>
