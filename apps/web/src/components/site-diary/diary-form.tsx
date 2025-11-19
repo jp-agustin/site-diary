@@ -63,7 +63,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({ onSubmit, isSubmitting }) => {
       <div className="space-y-4">
         <Input
           type="date"
-          value={date}
+          value={date || today}
           max={today}
           onChange={(e) => setDate(e.target.value)}
           placeholder="Date"
