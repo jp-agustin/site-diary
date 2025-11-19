@@ -1,5 +1,6 @@
 'use client';
 
+import DesktopHeader from '@/components/site-diary/desktop-header';
 import DiaryForm from '@/components/site-diary/diary-form';
 import MobileHeader from '@/components/site-diary/mobile-header';
 import { CREATE_SITE_DIARY, SITE_DIARIES } from '@/graphql/queries';
@@ -7,15 +8,20 @@ import { SiteDiaryInput } from '@/types/__generated__/graphql';
 import { useMutation } from '@apollo/client/react';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SiteDiaryCreatePage: React.FC = () => {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [createDiary] = useMutation(CREATE_SITE_DIARY, {
     refetchQueries: [{ query: SITE_DIARIES }],
     awaitRefetchQueries: true,
     onCompleted: () => {
+      setIsSubmitting(false);
       router.push('/site-diary');
     },
+    onError: () => setIsSubmitting(false),
   });
 
   const handleSubmit = (data: {
@@ -41,17 +47,26 @@ const SiteDiaryCreatePage: React.FC = () => {
       createdBy: 'Demo User',
     };
 
-    createDiary({
-      variables: {
-        input,
-      },
-    });
+    setIsSubmitting(true);
+    createDiary({ variables: { input } });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <MobileHeader title="New Diary Entry" />
-      <DiaryForm onSubmit={handleSubmit} />
+    <div className="min-h-screen bg-[var(--color-background)]">
+      <div className="hidden lg:block">
+        <DesktopHeader
+          title="New Diary Entry"
+          subtitle="Create a record for your site activities"
+        />
+      </div>
+
+      <div className="lg:hidden">
+        <MobileHeader title="New Diary Entry" />
+      </div>
+
+      <div className="p-4 md:p-6">
+        <DiaryForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+      </div>
     </div>
   );
 };
