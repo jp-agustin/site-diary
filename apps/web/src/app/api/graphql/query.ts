@@ -1,5 +1,11 @@
 import { SiteDiary } from '@/data/site-diary';
 
+/** @gqlType */
+interface SiteDiarySummary {
+  /** @gqlField */
+  summary: string;
+}
+
 /** @gqlQueryField */
 export async function siteDiaries(): Promise<SiteDiary[]> {
   const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}/site-diary`, {
@@ -20,5 +26,19 @@ export async function siteDiary(id: string): Promise<SiteDiary | undefined> {
   );
 
   if (!res.ok) throw new Error('Failed to fetch site diary');
+  return res.json();
+}
+
+/** @gqlQueryField */
+export async function siteDiarySummary(): Promise<SiteDiarySummary> {
+  const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}/ai/summary`, {
+    headers: { 'x-api-key': process.env.API_KEY || '' },
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed to fetch diary summary: ${text}`);
+  }
+
   return res.json();
 }

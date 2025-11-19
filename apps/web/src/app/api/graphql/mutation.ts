@@ -19,6 +19,12 @@ interface SiteDiaryInput {
   weather?: WeatherInput;
 }
 
+/** @gqlType */
+interface BeautifiedDiary {
+  /** @gqlField */
+  beautified: string;
+}
+
 /** @gqlMutationField */
 export async function createSiteDiary(
   input: SiteDiaryInput,
@@ -39,4 +45,25 @@ export async function createSiteDiary(
 
   const created: SiteDiary = await res.json();
   return created;
+}
+
+/** @gqlMutationField */
+export async function beautifyDiaryInput(
+  content: string,
+): Promise<BeautifiedDiary> {
+  const res = await fetch(`${process.env.NEXT_PRIVATE_API_URL}/ai/beautify`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.API_KEY || '',
+    },
+    body: JSON.stringify({ text: content }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed to beautify text: ${text}`);
+  }
+
+  return res.json();
 }

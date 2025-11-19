@@ -4,8 +4,8 @@
  */
 
 import { GraphQLSchema, GraphQLObjectType, GraphQLNonNull, GraphQLList, GraphQLString, GraphQLInt, GraphQLInputObjectType } from "graphql";
-import { siteDiaries as querySiteDiariesResolver, siteDiary as querySiteDiaryResolver } from "./query";
-import { createSiteDiary as mutationCreateSiteDiaryResolver } from "./mutation";
+import { siteDiaries as querySiteDiariesResolver, siteDiary as querySiteDiaryResolver, siteDiarySummary as querySiteDiarySummaryResolver } from "./query";
+import { beautifyDiaryInput as mutationBeautifyDiaryInputResolver, createSiteDiary as mutationCreateSiteDiaryResolver } from "./mutation";
 export function getSchema(): GraphQLSchema {
     const WeatherType: GraphQLObjectType = new GraphQLObjectType({
         name: "Weather",
@@ -61,6 +61,17 @@ export function getSchema(): GraphQLSchema {
             };
         }
     });
+    const SiteDiarySummaryType: GraphQLObjectType = new GraphQLObjectType({
+        name: "SiteDiarySummary",
+        fields() {
+            return {
+                summary: {
+                    name: "summary",
+                    type: new GraphQLNonNull(GraphQLString)
+                }
+            };
+        }
+    });
     const QueryType: GraphQLObjectType = new GraphQLObjectType({
         name: "Query",
         fields() {
@@ -83,6 +94,24 @@ export function getSchema(): GraphQLSchema {
                     resolve(_source, args) {
                         return querySiteDiaryResolver(args.id);
                     }
+                },
+                siteDiarySummary: {
+                    name: "siteDiarySummary",
+                    type: new GraphQLNonNull(SiteDiarySummaryType),
+                    resolve() {
+                        return querySiteDiarySummaryResolver();
+                    }
+                }
+            };
+        }
+    });
+    const BeautifiedDiaryType: GraphQLObjectType = new GraphQLObjectType({
+        name: "BeautifiedDiary",
+        fields() {
+            return {
+                beautified: {
+                    name: "beautified",
+                    type: new GraphQLNonNull(GraphQLString)
                 }
             };
         }
@@ -145,6 +174,18 @@ export function getSchema(): GraphQLSchema {
         name: "Mutation",
         fields() {
             return {
+                beautifyDiaryInput: {
+                    name: "beautifyDiaryInput",
+                    type: new GraphQLNonNull(BeautifiedDiaryType),
+                    args: {
+                        content: {
+                            type: new GraphQLNonNull(GraphQLString)
+                        }
+                    },
+                    resolve(_source, args) {
+                        return mutationBeautifyDiaryInputResolver(args.content);
+                    }
+                },
                 createSiteDiary: {
                     name: "createSiteDiary",
                     type: new GraphQLNonNull(SiteDiaryType),
@@ -163,6 +204,6 @@ export function getSchema(): GraphQLSchema {
     return new GraphQLSchema({
         query: QueryType,
         mutation: MutationType,
-        types: [SiteDiaryInputType, WeatherInputType, MutationType, QueryType, SiteDiaryType, WeatherType]
+        types: [SiteDiaryInputType, WeatherInputType, BeautifiedDiaryType, MutationType, QueryType, SiteDiaryType, SiteDiarySummaryType, WeatherType]
     });
 }

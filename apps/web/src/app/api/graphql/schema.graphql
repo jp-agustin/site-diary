@@ -17,13 +17,19 @@ input WeatherInput {
   temperature: Int!
 }
 
+type BeautifiedDiary {
+  beautified: String!
+}
+
 type Mutation {
+  beautifyDiaryInput(content: String!): BeautifiedDiary!
   createSiteDiary(input: SiteDiaryInput!): SiteDiary!
 }
 
 type Query {
   siteDiaries: [SiteDiary!]!
   siteDiary(id: String!): SiteDiary
+  siteDiarySummary: SiteDiarySummary!
 }
 
 type SiteDiary {
@@ -35,6 +41,10 @@ type SiteDiary {
   id: String!
   title: String!
   weather: Weather
+}
+
+type SiteDiarySummary {
+  summary: String!
 }
 
 type Weather {
