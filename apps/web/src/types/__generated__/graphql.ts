@@ -14,9 +14,20 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type BeautifiedDiary = {
+  __typename: 'BeautifiedDiary';
+  beautified: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename: 'Mutation';
+  beautifyDiaryInput: BeautifiedDiary;
   createSiteDiary: SiteDiary;
+};
+
+
+export type MutationBeautifyDiaryInputArgs = {
+  content: Scalars['String']['input'];
 };
 
 
@@ -28,6 +39,7 @@ export type Query = {
   __typename: 'Query';
   siteDiaries: Array<SiteDiary>;
   siteDiary: Maybe<SiteDiary>;
+  siteDiarySummary: SiteDiarySummary;
 };
 
 
@@ -56,6 +68,11 @@ export type SiteDiaryInput = {
   id: Scalars['String']['input'];
   title: Scalars['String']['input'];
   weather?: InputMaybe<WeatherInput>;
+};
+
+export type SiteDiarySummary = {
+  __typename: 'SiteDiarySummary';
+  summary: Scalars['String']['output'];
 };
 
 export type Weather = {
@@ -87,3 +104,15 @@ export type CreateSiteDiaryMutationVariables = Exact<{
 
 
 export type CreateSiteDiaryMutation = { createSiteDiary: { __typename: 'SiteDiary', id: string, title: string, date: string, createdBy: string, content: string | null, attendees: Array<string> | null, attachments: Array<string> | null, weather: { __typename: 'Weather', temperature: number, description: string } | null } };
+
+export type SiteDiarySummaryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteDiarySummaryQuery = { siteDiarySummary: { __typename: 'SiteDiarySummary', summary: string } };
+
+export type BeautifyDiaryMutationVariables = Exact<{
+  content: Scalars['String']['input'];
+}>;
+
+
+export type BeautifyDiaryMutation = { beautifyDiaryInput: { __typename: 'BeautifiedDiary', beautified: string } };

@@ -54,3 +54,21 @@ export const CREATE_SITE_DIARY = gql`
     }
   }
 `;
+
+// Summarize diaries
+export const SITE_DIARY_SUMMARY = gql`
+  query SiteDiarySummary {
+    siteDiarySummary {
+      summary
+    }
+  }
+`;
+
+// Beautify diary entry
+export const BEAUTIFY_DIARY = gql`
+  mutation BeautifyDiary($content: String!) {
+    beautifyDiaryInput(content: $content) {
+      beautified
+    }
+  }
+`;
