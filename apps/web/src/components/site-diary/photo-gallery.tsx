@@ -4,14 +4,26 @@ interface PhotoGalleryProps {
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   if (!photos?.length) {
-    return <p className="text-muted-foreground text-sm">No photos uploaded.</p>;
+    return (
+      <p className="text-sm" style={{ color: 'var(--color-muted-foreground)' }}>
+        No photos uploaded.
+      </p>
+    );
   }
 
   return (
     <div className="grid grid-cols-3 gap-2">
       {photos.map((src, i) => (
-        <div key={i} className="h-32 w-full rounded-md border object-cover">
-          <img src={src} alt="" className="h-full w-full object-cover" />
+        <div
+          key={i}
+          className="h-32 w-full rounded-md border"
+          style={{ borderColor: 'var(--color-border)' }}
+        >
+          <img
+            src={src}
+            alt={`Photo ${i + 1}`}
+            className="h-full w-full rounded-md object-cover"
+          />
         </div>
       ))}
     </div>
