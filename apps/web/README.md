@@ -120,6 +120,15 @@ There is a styling conflict with UploadThing: elements with the `hidden` Tailwin
   - The underlying UploadThing functions will still handle file uploads
   - The UI will be fully controlled to ensure consistent styling
 
+### AI Feature Testing Limitation
+
+- The AI summarization and beautification feature is integrated and callable through the internal API
+- During development, API calls could not be fully tested due to “insufficient credits", and I encountered difficulties adding credits to the account
+- Future work includes:
+  - Resolving the account/credit issue to enable proper testing
+  - Validating behavior with larger inputs, handling token limits, and implementing retries or chunked processing
+  - Use of other LLMs
+
 ### Additional Future Improvements
 
 #### Component Structure & Reusability
