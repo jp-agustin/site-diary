@@ -66,9 +66,11 @@ Construction teams often complete daily diaries while on-site, so mobile usabili
 - Implement image caching (thumbnails, caching, optional offline storage) to speed up image-heavy views, reduce mobile data usage
 
 ### AI Feature Integration & Improvements
+
 The AI summarization feature is now testable using Gemini Free Tier. API calls work as expected, returning summaries of diary content and beautified text
 
 #### Future Improvements:
+
 - Clean up and normalize AI responses for better readability
 - Handle longer inputs, token limits, and edge cases gracefully
 - Add caching or batching where appropriate to reduce API calls and improve performance
