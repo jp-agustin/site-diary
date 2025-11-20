@@ -3,9 +3,9 @@ name: 🚨 CI
 on:
   push:
     branches:
-      - '**'
+      - "**"
     tags-ignore:
-      - '**'
+      - "**"
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -75,6 +75,9 @@ jobs:
 
       - name: 📥 Install deps
         run: yarn install --frozen-lockfile --network-timeout 1000000
+
+      - name: Generate Prisma client
+        run: cd apps/web && npx prisma generate
 
       - name: 🔎 Type check
         run: yarn typecheck
