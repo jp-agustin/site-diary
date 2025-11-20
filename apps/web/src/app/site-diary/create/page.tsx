@@ -33,6 +33,8 @@ const SiteDiaryCreatePage: React.FC = () => {
     attendees?: string[];
     attachments?: string[];
   }) => {
+    // For testing purposes, the frontend currently generates unique IDs using nanoid and passes them to the backend
+    // In production, IDs should be generated only in the backend to ensure data integrity, prevents conflicts
     const input: SiteDiaryInput = {
       id: nanoid(),
       date: data.date,

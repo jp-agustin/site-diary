@@ -34,6 +34,7 @@ const SiteDiaryViewPage: React.FC = () => {
       </div>
 
       <div className="mx-auto max-w-5xl p-4 lg:p-6">
+        {/* Error */}
         {error && (
           <div
             className="mb-4 flex items-center gap-2 rounded-md border px-4 py-3"
@@ -48,6 +49,7 @@ const SiteDiaryViewPage: React.FC = () => {
           </div>
         )}
 
+        {/* Loading skeleton */}
         {loading ? (
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (

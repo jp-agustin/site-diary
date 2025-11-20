@@ -54,6 +54,7 @@ Construction teams often complete daily diaries while on-site, so mobile usabili
 - List items maintain readability with compact typography, spacing, and layout that preserves hierarchy without cramping
 - AI summary uses “Show more / Show less” on mobile, improving scanability and avoiding overwhelming text
 - Lazy queries (useLazyQuery for AI summary) ensure heavy operations run only when needed, improving load time on slower mobile networks
+- Provided global CSS was used for all styling rather than defining custom variables. This ensures the app automatically respects dark and light mode once the global theme is toggled or system preferences change.
 
 #### Future Considerations
 
@@ -119,7 +120,12 @@ There is a styling conflict with UploadThing: elements with the `hidden` Tailwin
   - The underlying UploadThing functions will still handle file uploads
   - The UI will be fully controlled to ensure consistent styling
 
-### Additional Improvements
+### Additional Future Improvements
+
+#### Component Structure & Reusability
+
+- Extract reusable components into a shared folder or library as currently, all components live within the `site-diary/` folder
+- Create a PageWrapper component to handle shared elements like headers (desktop and mobile) to reduce repetition, enforce layout consistency, and simplify adding new pages or modifying common elements
 
 #### Testing
 
