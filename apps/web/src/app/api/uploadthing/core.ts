@@ -5,7 +5,7 @@ const f = createUploadthing();
 export const ourFileRouter = {
   attachments: f({
     image: { maxFileSize: '8MB', maxFileCount: 10 },
-  }).onUploadComplete(async ({ metadata, file }) => {
+  }).onUploadComplete(async ({ file }) => {
     return { url: file.ufsUrl };
   }),
 } satisfies FileRouter;

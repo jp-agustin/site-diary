@@ -35,12 +35,15 @@ const BeautifyPreview: React.FC<BeautifyPreviewProps> = ({
   useEffect(() => {
     if (!originalText) return;
 
-    setLoading(true);
-    setError('');
-
-    beautifyDiary({
-      variables: { content: originalText },
-    });
+    const runBeautify = async () => {
+      setLoading(true);
+      setError('');
+      await beautifyDiary({
+        variables: { content: originalText },
+      });
+      setLoading(false);
+    };
+    runBeautify();
   }, [originalText, beautifyDiary]);
 
   if (!originalText) return null;

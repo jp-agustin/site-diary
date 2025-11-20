@@ -69,7 +69,7 @@ const DiarySummaryCard: React.FC = () => {
 
       {!data && !loading && !error && (
         <p className="text-muted-foreground text-sm italic">
-          Click "Generate Summary" to get the weekly AI summary.
+          Click &quot;Generate Summary&quot; to get the weekly AI summary.
         </p>
       )}
 
