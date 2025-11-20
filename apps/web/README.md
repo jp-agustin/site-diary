@@ -1,10 +1,11 @@
-# Simplified Site Diary 
+# Simplified Site Diary
 
 ## Environment Variables
 
 Create a `.env.local` and `.env` file in this directory:
 
 `.env.local`
+
 ```sh
 API_KEY=something-cool
 NEXT_PUBLIC_API_GRAPHQL_URL=http://localhost:3000/api/graphql
@@ -14,11 +15,13 @@ OPENAI_API_KEY=
 ```
 
 `.env`
+
 ```sh
 DATABASE_URL=
 ```
 
 ## Running My Changes
+
 To test the latest updates, follow these steps:
 
 1. Regenerate Prisma client (from this directory):
@@ -63,6 +66,7 @@ Construction teams often complete daily diaries while on-site, so mobile usabili
 ### Architecture Decisions
 
 #### Why the backend sits inside Next.js
+
 Keeping the backend within Next.js simplifies development for a small project
 
 - Speed of Development
@@ -72,6 +76,7 @@ Keeping the backend within Next.js simplifies development for a small project
 - Avoids Over-Engineering
 
 #### Scalability Limitations of Backend Inside Next.js
+
 While convenient for small projects, embedding backend logic in Next.js has inherent limits for larger applications
 
 - API Routes are Stateless Serverless Functions
@@ -100,6 +105,7 @@ While convenient for small projects, embedding backend logic in Next.js has inhe
 - Simplifies testing: the internal API can be unit-tested independently from GraphQL resolvers
 
 ### Known Issue: UploadThing CSS
+
 There is a styling conflict with UploadThing: elements with the `hidden` Tailwind class remain hidden even after responsive breakpoints (`breakpoint:*`) are applied.
 
 #### Quick Fix Implemented
