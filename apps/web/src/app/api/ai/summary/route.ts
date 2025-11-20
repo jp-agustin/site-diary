@@ -1,4 +1,4 @@
-import { generateDiarySummary } from '@/lib/ai';
+import { generateDiarySummary } from '@/lib/gemini';
 import { SiteDiary } from '@/types/__generated__/graphql';
 import { NextResponse } from 'next/server';
 

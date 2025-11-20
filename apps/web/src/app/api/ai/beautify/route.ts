@@ -1,4 +1,4 @@
-import { beautifyDiaryText } from '@/lib/ai';
+import { beautifyDiaryText } from '@/lib/gemini';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {

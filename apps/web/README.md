@@ -11,7 +11,8 @@ API_KEY=something-cool
 NEXT_PUBLIC_API_GRAPHQL_URL=http://localhost:3000/api/graphql
 NEXT_PRIVATE_API_URL=http://localhost:3000/api/
 UPLOADTHING_TOKEN=
-OPENAI_API_KEY=
+OPENAI_API_KEY= // For open AI token
+GEMINI_API_KEY= // For gemini token (current integrated)
 ```
 
 `.env`
@@ -119,15 +120,6 @@ There is a styling conflict with UploadThing: elements with the `hidden` Tailwin
 - Replace the UploadThing UI with a custom upload component
   - The underlying UploadThing functions will still handle file uploads
   - The UI will be fully controlled to ensure consistent styling
-
-### AI Feature Testing Limitation
-
-- The AI summarization and beautification feature is integrated and callable through the internal API
-- During development, API calls could not be fully tested due to “insufficient credits", and I encountered difficulties adding credits to the account
-- Future work includes:
-  - Resolving the account/credit issue to enable proper testing
-  - Validating behavior with larger inputs, handling token limits, and implementing retries or chunked processing
-  - Use of other LLMs
 
 ### Additional Future Improvements
 
